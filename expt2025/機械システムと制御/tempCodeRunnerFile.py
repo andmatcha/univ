@@ -1,1 +1,1 @@
-from pathlib import Path
+label="実験値")

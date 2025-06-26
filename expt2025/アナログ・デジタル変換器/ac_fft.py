@@ -22,6 +22,7 @@ df_high = pd.read_csv(
 
 #### -------- グラフ設定 -------- ####
 plt.rcParams["font.size"] = 12  # フォントサイズ設定
+plt.rcParams["font.family"] = "Noto Sans JP"
 plt.rcParams["xtick.direction"] = "in"
 plt.rcParams["ytick.direction"] = "in"
 plt.rcParams["figure.figsize"] = (8, 6)  # グラフのサイズを設定
@@ -36,7 +37,7 @@ ax1.plot(
 )
 
 ax1.set_xlabel("周波数(Hz)")
-ax1.set_ylabel("振幅 (dB)")
+ax1.set_ylabel("パワースペクトル密度 (dB)")
 
 # ax1.axvline(FREQ_LOW, 0, 1, color="r", linestyle="dashed", lw="1") # 基本波
 
@@ -50,14 +51,22 @@ ax2.plot(
 )
 
 ax2.set_xlabel("周波数(Hz)")
-ax2.set_ylabel("振幅 (dB)")
+ax2.set_ylabel("パワースペクトル密度 (dB)")
 
 # ax2.axvline(FREQ_HIGH, 0, 1, color="r", linestyle="dashed", lw="1") # 基本波
 
 #### -------- グラフを描画・保存 -------- ####
 try:
-    fig1.savefig("/home/jinaoyagi/pictures/20250619_実験/sin波fft_low.png")
-    fig2.savefig("/home/jinaoyagi/pictures/20250619_実験/sin波fft_high.png")
+    # Win
+    # fig1.savefig("/home/jinaoyagi/pictures/20250619_実験/sin波fft_low.png")
+    # fig2.savefig("/home/jinaoyagi/pictures/20250619_実験/sin波fft_high.png")
+
+    # Mac
+    output_dir = Path(__file__).resolve().parent.joinpath("figures")
+    output_dir.mkdir(exist_ok=True)
+    fig1.savefig(output_dir.joinpath("sin波fft_low.png"), dpi=300)
+    fig2.savefig(output_dir.joinpath("sin波fft_high.png"), dpi=300)
+
     print("画像の保存が完了しました")
     # plt.show()
 except Exception as e:

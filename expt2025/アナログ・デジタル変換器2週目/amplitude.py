@@ -8,7 +8,7 @@ filenames = [
     "newkawaii1_10MHz_10kHz_1sec_extracted.csv",
     "newkawaii2_400kHz_10kHz_1sec_extracted.csv",
     "newkawaii3_500kHz_500Hz_1sec_extracted.csv",
-    "newkawaii4_20kHz_500Hz_1sec_extracted.csv"
+    "newkawaii4_20kHz_500Hz_1sec_extracted.csv",
     "waltz1_10MHz_10kHz_1sec_extracted.csv",
     "waltz2_400kHz_10kHz_1sec_extracted.csv",
     "waltz3_500kHz_500Hz_1sec_extracted.csv",
@@ -37,22 +37,11 @@ for filename in filenames:
 
 #### -------- グラフ設定 -------- ####
 plt.rcParams["font.size"] = 12
-plt.rcParams["font.family"] = "Hiragino Mincho ProN"
+plt.rcParams["font.family"] = "Noto Sans JP"
 plt.rcParams["xtick.direction"] = "in"
 plt.rcParams["ytick.direction"] = "in"
 
 #### -------- データをプロット -------- ####
-fig, ax = plt.subplots(figsize=(8, 6))
-ax.plot(
-    dataframes["newkawaii1"]["Time"],
-    dataframes["newkawaii1"]["Amplitude"],
-    linestyle="solid",
-    lw=1,
-)
-ax.set_xlabel("時刻(s)")
-ax.set_ylabel("振幅")
-
-
 output_dir = Path(__file__).resolve().parent.joinpath("figures")
 output_dir.mkdir(exist_ok=True)
 for name, df in dataframes.items():
@@ -76,7 +65,7 @@ for name, df in dataframes.items():
     # 4. グラフをファイルとして保存
     #    ファイル名は 'newkawaii1_plot.png' のようになります
     save_path = output_dir.joinpath(f"{name}_plot.png")
-    plt.savefig(save_path)
+    plt.savefig(save_path, dpi=300)
 
     # 5. メモリを解放するために、プロットを閉じる（重要）
     plt.close(fig)
